@@ -1,6 +1,13 @@
 <?php
 declare(strict_types=1);
 
+/**
+ * Portfolio landing page for Khabat Setaei.
+ *
+ * Built with small PHP helpers to keep content structured, avoid markup duplication,
+ * and guarantee that every dynamic value is safely escaped before rendering.
+ */
+
 function esc(string $value): string
 {
     return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
@@ -9,6 +16,35 @@ function esc(string $value): string
 $site = [
     'name' => 'Khabat Setaei',
     'title' => 'Hybrid Intelligence Strategist',
+/**
+ * Render a list of social icons.
+ *
+ * @param array<int, array{label: string, url: string, title?: string}> $links
+ */
+function renderSocialIcons(array $links): string
+{
+    if ($links === []) {
+        return '';
+    }
+
+    ob_start();
+    echo "<ul class=\"social-icons\">";
+    foreach ($links as $link) {
+        $label = $link['label'];
+        $url = $link['url'];
+        $title = $link['title'] ?? $label;
+        echo '<li><a href="' . esc($url) . '" title="' . esc($title) . '" rel="noopener" target="_blank">';
+        echo '<span class="sr-only">' . esc($label) . '</span>';
+        echo '</a></li>';
+    }
+    echo '</ul>';
+
+    return (string) ob_get_clean();
+}
+
+$site = [
+    'name' => 'Khabat Setaei',
+    'title' => 'AI & Blockchain Portfolio',
     'tagline' => 'AI & Blockchain Engineer',
     'email' => 'khabat@setaei.com',
     'phone' => '+47 4122 7175',
@@ -17,6 +53,10 @@ $site = [
     'meta_description' => 'Khabat Setaei is an AI and blockchain engineer crafting hybrid intelligence products, growth systems, and narrative-driven ventures.',
     'hero_subtitle' => 'Hybrid Intelligence · Blockchain · Product Systems',
     'hero_cta' => 'https://cal.com/khabat-setaei/intro',
+    'hero_subtitle' => 'AI & Blockchain • IT Marketing • Jewelry • Crypto',
+    'hero_cta' => 'https://cal.com/khabat-setaei/intro',
+    'meta_description' => 'Portfolio of Khabat Setaei – AI & Blockchain engineer focused on hybrid intelligence, tokenized products, and growth strategy.',
+    'meta_keywords' => 'Khabat Setaei, AI engineer, blockchain consultant, tokenomics, hybrid intelligence',
 ];
 
 $navigation = [
@@ -33,6 +73,15 @@ $socialLinks = [
     ['label' => 'X', 'url' => 'https://x.com/TheXebat'],
     ['label' => 'LinkedIn', 'url' => 'https://linkedin.com/in/khabat-setaei'],
     ['label' => 'GitHub', 'url' => 'https://github.com/khabat'],
+    ['anchor' => 'resume', 'label' => 'Resume'],
+    ['anchor' => 'testimonials', 'label' => 'Testimonials'],
+    ['anchor' => 'contact', 'label' => 'Contact Me'],
+];
+
+$socialLinks = [
+    ['label' => 'Facebook', 'url' => 'https://www.facebook.com/t2c360'],
+    ['label' => 'X (Twitter)', 'url' => 'https://x.com/TheXebat'],
+    ['label' => 'LinkedIn', 'url' => 'https://linkedin.com/in/khabat-setaei'],
     ['label' => 'Instagram', 'url' => 'https://www.instagram.com/xebat227/'],
 ];
 
@@ -132,6 +181,79 @@ $references = [
         'name' => 'Åse Steinsland',
         'link' => 'https://numerologensverden.no/',
         'link_label' => 'numerologensverden.no',
+    ['title' => 'AI & Blockchain Consulting', 'summary' => 'Architecture, tokenomics, audits, smart-contract strategy.'],
+    ['title' => 'Product & Growth (IT Marketing)', 'summary' => 'Positioning, funnels, analytics, SEO.'],
+    ['title' => 'Web Apps & Integrations', 'summary' => 'Django/Next.js, payments, APIs (Rasmio, etc.).'],
+    ['title' => 'Brand & Identity', 'summary' => 'Minimal logos, design systems, guidelines.'],
+    ['title' => 'Portfolio & Resume Sites', 'summary' => 'Fast, SEO-ready, Netlify/Vercel deployments.'],
+    ['title' => 'Training & Workshops', 'summary' => 'AI literacy and blockchain basics for teams.'],
+];
+
+$education = [
+    [
+        'year' => '2022',
+        'title' => 'M.Sc. Computer Engineering (AI & Robotics)',
+        'description' => 'Graduated with a thesis on hybrid SEM+ANN, focusing on artificial intelligence and robotics.',
+    ],
+    [
+        'year' => '2018',
+        'title' => 'B.Sc. Computer Engineering',
+        'description' => 'Completed bachelor’s degree in software engineering and computer systems.',
+    ],
+    [
+        'year' => '2010',
+        'title' => 'High School Diploma – Mathematics & Physics',
+        'description' => 'Studied advanced mathematics and physics to prepare for engineering education.',
+    ],
+];
+
+$experience = [
+    [
+        'year' => '2025–Present',
+        'title' => 'Founder & CTO – Sisu Project',
+        'description' => 'Launching a multilingual portal for jobs and tourism integrating the Rasmio API and crypto payment rails.',
+    ],
+    [
+        'year' => '2022–2024',
+        'title' => 'AI & Blockchain Consultant',
+        'description' => 'Designed token economies, performed smart-contract audits, and drove product growth for clients.',
+    ],
+    [
+        'year' => '2019–2022',
+        'title' => 'Front-end & Product Engineer',
+        'description' => 'Collaborated with Telenor, Google Earth, and Apple on interface development and product strategy.',
+    ],
+];
+
+$designSkills = [
+    ['label' => 'Web Design', 'percent' => 90],
+    ['label' => 'Illustration', 'percent' => 80],
+    ['label' => 'HTML / CSS', 'percent' => 95],
+    ['label' => 'Photoshop', 'percent' => 70],
+];
+
+$programmingSkills = [
+    ['label' => 'Web Development', 'percent' => 90],
+    ['label' => 'PHP / MySQL', 'percent' => 80],
+    ['label' => 'Python', 'percent' => 95],
+    ['label' => 'C++', 'percent' => 70],
+];
+
+$testimonials = [
+    [
+        'quote' => 'We used Setaei for SEO on our webshop megacandy.no and were very satisfied. We saw strong results and received thorough progress reports along the way. Customer service and communication were impeccable. Highly recommended.',
+        'name' => 'Alexander Boccio',
+        'title' => 'Founder, megacandy.no',
+    ],
+    [
+        'quote' => 'I have worked with Setaei across several companies I have led and founded—from logo design and web development to marketing assets. He delivers fast, understands customer needs, and always goes the extra mile. I can warmly recommend him.',
+        'name' => 'Soheil Seyedi',
+        'title' => 'Entrepreneur',
+    ],
+    [
+        'quote' => 'Setaei provides creative, forward-thinking, and well-crafted solutions with a high level of service, responsiveness, and on-time delivery. Up-to-date and ahead of the curve in web development. Recommended.',
+        'name' => 'Anne-Mette Røsting',
+        'title' => 'Founder, naturalforce.no',
     ],
 ];
 
@@ -143,332 +265,593 @@ $year = (int) date('Y');
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="<?= esc($site['meta_description']); ?>">
+    <meta name="keywords" content="<?= esc($site['meta_keywords']); ?>">
+    <meta property="og:title" content="<?= esc($site['name'] . ' – ' . $site['title']); ?>">
+    <meta property="og:description" content="<?= esc($site['meta_description']); ?>">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<?= esc($site['website']); ?>">
+    <meta property="og:image" content="https://setaei.com/images/khabat.jpg">
     <link rel="canonical" href="<?= esc($site['website']); ?>">
     <title><?= esc($site['name'] . ' – ' . $site['title']); ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&family=IBM+Plex+Mono:wght@300;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #f9f9f9;
-            --fg: #111111;
-            --muted: #555555;
-            --line: #dcdcdc;
-            --card-bg: #ffffff;
-            --max-width: 1100px;
-        }
-        *, *::before, *::after { box-sizing: border-box; }
-        body {
-            margin: 0;
-            font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--bg);
-            color: var(--fg);
-            line-height: 1.7;
-        }
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-        a:hover,
-        a:focus {
-            text-decoration: underline;
-        }
-        header, section, footer { padding: 80px 20px; }
-        .container { max-width: var(--max-width); margin: 0 auto; }
-        header { padding-top: 40px; }
-        nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            padding-bottom: 24px;
-            margin-bottom: 48px;
-            border-bottom: 1px solid var(--line);
-        }
-        .nav-brand { font-size: 1.5rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-        }
-        .nav-links a { color: var(--muted); }
-        .hero {
-            display: grid;
-            gap: 36px;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            align-items: center;
-        }
-        .hero h1 { font-size: clamp(2.4rem, 5vw, 3.4rem); margin: 0 0 16px; }
-        .hero p { margin: 0 0 20px; color: var(--muted); font-size: 1.05rem; }
-        .hero .cta {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 26px;
-            border: 1px solid var(--fg);
-            color: var(--fg);
-            font-weight: 600;
-            border-radius: 999px;
-            transition: background-color 0.2s ease, color 0.2s ease;
-        }
-        .hero .cta:hover,
-        .hero .cta:focus {
-            background: var(--fg);
-            color: #ffffff;
-        }
-        .hero-portrait {
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid var(--line);
-            background: var(--card-bg);
-            min-height: 320px;
-        }
-        .hero-portrait img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .section-title {
-            text-transform: uppercase;
-            letter-spacing: 0.28em;
-            font-size: 0.82rem;
-            color: var(--muted);
-            margin-bottom: 14px;
-        }
-        h2 { margin: 0 0 20px; font-size: clamp(2rem, 4vw, 2.6rem); }
-        p { margin: 0 0 18px; }
-        .grid {
-            display: grid;
-            gap: 22px;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        }
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--line);
-            border-radius: 16px;
-            padding: 24px;
-            min-height: 170px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .card h3 { margin: 0; font-size: 1.18rem; }
-        .card p { margin: 0; color: var(--muted); }
-        .card a {
-            margin-top: auto;
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.9rem;
-            color: var(--fg);
-        }
-        .about-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; font-size: 0.95rem; color: var(--muted); }
-        blockquote {
-            margin: 0 0 12px;
-            padding: 0;
-            font-size: 1.02rem;
-        }
-        .reference-meta {
-            margin-top: auto;
-            color: var(--muted);
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.85rem;
-            letter-spacing: 0.04em;
-        }
-        .social-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            list-style: none;
-            padding: 0;
-            margin: 28px 0 0;
-        }
-        .social-list a {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 14px;
-            border: 1px solid var(--line);
-            border-radius: 999px;
-            font-size: 0.85rem;
-            color: var(--fg);
-        }
-        .contact-panel {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 22px;
-            align-items: stretch;
-        }
-        .contact-card {
-            background: var(--card-bg);
-            border: 1px solid var(--line);
-            border-radius: 16px;
-            padding: 24px;
-        }
-        .contact-card h3 {
-            margin-top: 0;
-            font-size: 1.18rem;
-        }
-        footer {
-            padding: 40px 20px;
-            text-align: center;
-            color: var(--muted);
-            font-size: 0.88rem;
-            border-top: 1px solid var(--line);
-        }
-        @media (max-width: 720px) {
-            nav { flex-direction: column; align-items: flex-start; }
-            .nav-links { flex-wrap: wrap; justify-content: flex-start; }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/fullpage.min.css">
+    <link rel="stylesheet" href="css/lity.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/pe-icon-7-stroke.css">
+    <link rel="stylesheet" href="css/menu-effect.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/background-animation.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "<?= esc($site['name']); ?>",
+        "jobTitle": "<?= esc($site['tagline']); ?>",
+        "url": "<?= esc($site['website']); ?>",
+        "email": "mailto:<?= esc($site['email']); ?>",
+        "telephone": "<?= esc($site['phone']); ?>",
+        "sameAs": [
+            <?php
+            $sameAs = array_map(static fn($link) => '"' . esc($link['url']) . '"', $socialLinks);
+            echo implode(',', $sameAs);
+            ?>
+        ]
+    }
+    </script>
 </head>
-<body>
-    <header id="home">
-        <div class="container">
-            <nav>
-                <div class="nav-brand"><?= esc($site['name']); ?></div>
-                <ul class="nav-links">
-                    <?php foreach ($navigation as $item): ?>
-                        <li><a href="#<?= esc($item['anchor']); ?>"><?= esc($item['label']); ?></a></li>
-                    <?php endforeach; ?>
-                </ul>
+<body class="light page-with-colors gradient-none" dir="ltr">
+    <div class="preloader" aria-hidden="true">
+        <div class="preloader-box">
+            <span><?= esc($site['name']); ?></span>
+        </div>
+    </div>
+
+    <div class="menu-style demo-2 animated-row">
+        <div class="content--demo-2">
+            <button class="hamburger js-hover animate" data-animate="fadeInDown" type="button" aria-label="Toggle navigation">
+                <span class="hamburger__line hamburger__line--01"><span class="hamburger__line-in hamburger__line-in--01"></span></span>
+                <span class="hamburger__line hamburger__line--02"><span class="hamburger__line-in hamburger__line-in--02"></span></span>
+                <span class="hamburger__line hamburger__line--03"><span class="hamburger__line-in hamburger__line-in--03"></span></span>
+                <span class="hamburger__line hamburger__line--cross01"><span class="hamburger__line-in hamburger__line-in--cross01"></span></span>
+                <span class="hamburger__line hamburger__line--cross02"><span class="hamburger__line-in hamburger__line-in--cross02"></span></span>
+            </button>
+
+            <nav class="global-menu" aria-label="Primary">
+                <div class="global-menu__wrap">
+                    <div class="nav-box navbar-collapse">
+                        <ul class="navigation-menu nav navbar-nav" id="nav">
+                            <?php foreach ($navigation as $index => $item): ?>
+                                <li data-menuanchor="slide<?= sprintf('%02d', $index + 1); ?>"<?= $index === 0 ? ' class="active"' : ''; ?>>
+                                    <a class="global-menu__item global-menu__item--demo-2" href="#<?= esc($item['anchor']); ?>"><?= esc($item['label']); ?></a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
             </nav>
-            <div class="hero">
-                <div>
-                    <span class="section-title">Hybrid Intelligence Studio</span>
-                    <h1><?= esc($site['name']); ?></h1>
-                    <p><?= esc($site['hero_subtitle']); ?></p>
-                    <a class="cta" href="<?= esc($site['hero_cta']); ?>" target="_blank" rel="noopener">Book a 20‑min call →</a>
-                    <ul class="social-list">
-                        <?php foreach ($socialLinks as $link): ?>
-                            <li><a href="<?= esc($link['url']); ?>" target="_blank" rel="noopener"><?= esc($link['label']); ?></a></li>
-                        <?php endforeach; ?>
-                    </ul>
+
+            <svg class="shape-overlays" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <path class="shape-overlays__path"></path>
+                <path class="shape-overlays__path"></path>
+                <path class="shape-overlays__path"></path>
+                <path class="shape-overlays__path"></path>
+            </svg>
+        </div>
+    </div>
+
+    <div class="page-background" aria-hidden="true">
+        <div class="line-wrap line-black">
+            <div class="line-item"></div>
+            <div class="line-item"></div>
+            <div class="line-item"></div>
+            <div class="line-item"></div>
+            <div class="line-item"></div>
+        </div>
+    </div>
+
+    <div id="social-icons" class="desktop-none">
+        <div class="text-right desktop-none">
+            <?= renderSocialIcons($socialLinks); ?>
+        </div>
+    </div>
+    <div class="slide-button desktop-none" aria-hidden="true">
+        <div class="next-sec"></div>
+        <div class="prev-sec"></div>
+    </div>
+    <div class="logo-and-title desktop-none">
+        <div class="myimg">
+            <img src="https://setaei.com/logo.png" alt="<?= esc($site['name']); ?> logo" draggable="false" loading="lazy">
+        </div>
+        <div class="name-box">
+            <h3><?= esc($site['name']); ?></h3>
+            <div class="title-box">
+                <h5><?= esc($site['tagline']); ?></h5>
+            </div>
+        </div>
+    </div>
+
+    <div id="fullpage" class="fullpage-default">
+        <section class="section home animated-row" data-section="home" id="home">
+            <div class="fixed-layout-content mobile-none">
+                <div class="center">
+                    <div id="social-icons-desktop" class="animate" data-animate="fadeInUp">
+                        <div class="text-right">
+                            <?= renderSocialIcons($socialLinks); ?>
+                        </div>
+                    </div>
+                    <div class="slide-button animate" data-animate="fadeInUp" aria-hidden="true">
+                        <div class="next-sec"></div>
+                        <div class="prev-sec"></div>
+                    </div>
                 </div>
-                <div class="hero-portrait">
-                    <img src="https://setaei.com/images/khabat.jpg" alt="Portrait of <?= esc($site['name']); ?>" loading="lazy">
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <section id="about">
-        <div class="container">
-            <span class="section-title">About</span>
-            <h2>Designing systems where data, finance, and myth co-exist.</h2>
-            <p>
-                I bridge AI architectures with tokenized products and crafted storytelling. From Nordic growth funds to
-                independent founders, teams work with me to architect resilient products, build brand equity, and translate
-                complex technology into market-ready experiences.
-            </p>
-            <p>
-                I recently completed an M.Sc. in Computer Engineering (AI &amp; Robotics), focusing on hybrid intelligence models
-                that blend symbolic reasoning with neural systems. That research now informs advisory work across venture design,
-                data strategy, and narrative systems.
-            </p>
-            <p>
-                Selected experiments, prototypes, and research notes are shared openly on GitHub to support peers exploring
-                hybrid intelligence, blockchain infrastructure, and computational storytelling.
-            </p>
-            <ul class="about-list">
-                <li><strong>Email:</strong> <a href="mailto:<?= esc($site['email']); ?>"><?= esc($site['email']); ?></a></li>
-                <li><strong>Phone:</strong> <a href="tel:+4741227175"><?= esc($site['phone']); ?></a></li>
-                <li><strong>Location:</strong> <?= esc($site['location']); ?></li>
-                <li><strong>Website:</strong> <a href="<?= esc($site['website']); ?>">setaei.com</a></li>
-            </ul>
-        </div>
-    </section>
-
-    <section id="services">
-        <div class="container">
-            <span class="section-title">Services</span>
-            <h2>What I lead and deliver.</h2>
-            <div class="grid">
-                <?php foreach ($services as $service): ?>
-                    <article class="card">
-                        <h3><?= esc($service['title']); ?></h3>
-                        <p><?= esc($service['summary']); ?></p>
-                    </article>
-                <?php endforeach; ?>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects">
-        <div class="container">
-            <span class="section-title">Ongoing Projects</span>
-            <h2>Current ventures under active development.</h2>
-            <div class="grid">
-                <?php foreach ($projects as $project): ?>
-                    <article class="card">
-                        <h3><?= esc($project['name']); ?></h3>
-                        <p><?= esc($project['summary']); ?></p>
-                        <a href="<?= esc($project['url']); ?>" target="_blank" rel="noopener">Visit project →</a>
-                    </article>
-                <?php endforeach; ?>
-            </div>
-        </div>
-    </section>
-
-    <section id="books">
-        <div class="container">
-            <span class="section-title">Books &amp; Publications</span>
-            <h2>Authoring works that translate hybrid intelligence into practice.</h2>
-            <div class="grid">
-                <?php foreach ($books as $book): ?>
-                    <article class="card">
-                        <h3><?= esc($book['title']); ?></h3>
-                        <p><?= esc($book['summary']); ?></p>
-                        <a href="<?= esc($book['url']); ?>" target="_blank" rel="noopener">Explore →</a>
-                    </article>
-                <?php endforeach; ?>
-            </div>
-        </div>
-    </section>
-
-    <section id="references">
-        <div class="container">
-            <span class="section-title">References</span>
-            <h2>Trusted by investors, founders, and creative technologists.</h2>
-            <div class="grid">
-                <?php foreach ($references as $reference): ?>
-                    <article class="card reference-card">
-                        <blockquote><?= esc($reference['quote']); ?></blockquote>
-                        <p class="reference-meta">— <strong><?= esc($reference['name']); ?></strong> · <a href="<?= esc($reference['link']); ?>" target="_blank" rel="noopener"><?= esc($reference['link_label']); ?></a></p>
-                    </article>
-                <?php endforeach; ?>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact">
-        <div class="container">
-            <span class="section-title">Contact</span>
-            <h2>Let’s align on your next build or investment.</h2>
-            <div class="contact-panel">
-                <div class="contact-card">
-                    <h3>Direct outreach</h3>
-                    <p>Share a short brief on your hybrid intelligence, blockchain, or product venture. I respond to every serious inquiry within 24 hours.</p>
-                    <p><strong>Email:</strong> <a href="mailto:<?= esc($site['email']); ?>"><?= esc($site['email']); ?></a><br>
-                    <strong>Phone:</strong> <a href="tel:+4741227175"><?= esc($site['phone']); ?></a></p>
-                </div>
-                <div class="contact-card">
-                    <h3>Schedule a call</h3>
-                    <p>Book a focused strategy session to outline scope, delivery models, and investment readiness.</p>
-                    <a class="cta" href="<?= esc($site['hero_cta']); ?>" target="_blank" rel="noopener">Book a 20‑min call →</a>
+                <div class="logo-and-title animate" data-animate="fadeInDown">
+                    <div class="myimg">
+                        <img src="https://setaei.com/images/khabat.jpg" alt="Portrait of <?= esc($site['name']); ?>" draggable="false" loading="lazy">
+                    </div>
+                    <div class="name-box">
+                        <h3><?= esc($site['name']); ?></h3>
+                        <div class="title-box">
+                            <h5><?= esc($site['tagline']); ?></h5>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <footer>
-        <div class="container">
-            © <?= esc((string) $year); ?> <?= esc($site['name']); ?> · All rights reserved · <a href="mailto:<?= esc($site['email']); ?>"><?= esc($site['email']); ?></a>
+            <div class="current-section animated fadeInUp" data-animate="fadeInUp">
+                <div class="lg-line"></div>
+                <div class="sm-line"></div>
+                <div class="section-name">Welcome</div>
+            </div>
+
+            <div class="section-inner">
+                <div class="line-wrap line-black" aria-hidden="true">
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                </div>
+                <div class="section-hero-content">
+                    <h1>Hello!<br>I'm <span><?= esc($site['name']); ?></span></h1>
+                    <p class="block">
+                        <strong class="sec-font"><?= esc($site['hero_subtitle']); ?></strong>
+                    </p>
+                    <a href="<?= esc($site['hero_cta']); ?>" class="sec-font btn theme-btn" target="_blank" rel="noopener">
+                        <span>Book a 20‑min Call</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section about animated-row" data-section="about" id="about">
+            <div class="fixed-layout-content mobile-none">
+                <div class="center">
+                    <div class="animate" data-animate="fadeInUp">
+                        <div class="text-right">
+                            <?= renderSocialIcons($socialLinks); ?>
+                        </div>
+                    </div>
+                    <div class="slide-button animate" data-animate="fadeInUp" aria-hidden="true">
+                        <div class="next-sec"></div>
+                        <div class="prev-sec"></div>
+                    </div>
+                </div>
+                <div class="logo-and-title animate" data-animate="fadeInDown">
+                    <div class="myimg">
+                        <img src="https://setaei.com/images/khabat.jpg" alt="Portrait of <?= esc($site['name']); ?>" draggable="false" loading="lazy">
+                    </div>
+                    <div class="name-box">
+                        <h3><?= esc($site['name']); ?></h3>
+                        <div class="title-box">
+                            <h5><?= esc($site['tagline']); ?></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="current-section animated fadeInUp" data-animate="fadeInUp">
+                <div class="lg-line"></div>
+                <div class="sm-line"></div>
+                <div class="section-name">About</div>
+            </div>
+
+            <div class="section-inner">
+                <div class="line-wrap line-black" aria-hidden="true">
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                </div>
+                <div class="center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-5">
+                                <div class="about-image-area">
+                                    <div class="img-box">
+                                        <img src="https://setaei.com/images/khabat-profile.jpg" alt="<?= esc($site['name']); ?> working" loading="lazy">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-7">
+                                <div class="about-info-area">
+                                    <h2>Hello, I am <span><?= esc($site['name']); ?></span><br><?= esc($site['tagline']); ?></h2>
+                                    <p>
+                                        I’m an AI &amp; blockchain-focused engineer and product strategist with hands-on experience in IT marketing,
+                                        web systems, and tokenized products. I combine technical build with brand growth and bridge the gap between
+                                        data infrastructure and storytelling.
+                                    </p>
+                                    <ul>
+                                        <li><div class="p-info"><em>Name</em><span><?= esc($site['name']); ?></span></div></li>
+                                        <li><div class="p-info"><em>Date of birth</em><span>March 8, 1983</span></div></li>
+                                        <li><div class="p-info"><em>E-mail</em><span><a href="mailto:<?= esc($site['email']); ?>"><?= esc($site['email']); ?></a></span></div></li>
+                                        <li><div class="p-info"><em>Phone</em><span><a href="tel:<?= esc(str_replace(' ', '', $site['phone'])); ?>"><?= esc($site['phone']); ?></a></span></div></li>
+                                        <li><div class="p-info"><em>Address</em><span><?= esc($site['location']); ?></span></div></li>
+                                        <li><div class="p-info"><em>Website</em><span><a href="<?= esc($site['website']); ?>">setaei.com</a></span></div></li>
+                                    </ul>
+                                    <div class="button-box">
+                                        <a href="/docs/Khabat-Setaei-CV.pdf" class="sec-font btn theme-btn" rel="noopener" target="_blank">
+                                            <span>Download resume</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section services animated-row" data-section="services" id="services">
+            <div class="fixed-layout-content mobile-none">
+                <div class="center">
+                    <div class="animate" data-animate="fadeInUp">
+                        <div class="text-right">
+                            <?= renderSocialIcons($socialLinks); ?>
+                        </div>
+                    </div>
+                    <div class="slide-button animate" data-animate="fadeInUp" aria-hidden="true">
+                        <div class="next-sec"></div>
+                        <div class="prev-sec"></div>
+                    </div>
+                </div>
+                <div class="logo-and-title animate" data-animate="fadeInDown">
+                    <div class="myimg">
+                        <img src="https://setaei.com/images/khabat.jpg" alt="Portrait of <?= esc($site['name']); ?>" draggable="false" loading="lazy">
+                    </div>
+                    <div class="name-box">
+                        <h3><?= esc($site['name']); ?></h3>
+                        <div class="title-box">
+                            <h5><?= esc($site['tagline']); ?></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="current-section animated fadeInUp" data-animate="fadeInUp">
+                <div class="lg-line"></div>
+                <div class="sm-line"></div>
+                <div class="section-name">Services</div>
+            </div>
+
+            <div class="section-inner">
+                <div class="line-wrap line-black" aria-hidden="true">
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                </div>
+                <div class="center">
+                    <div class="container">
+                        <div class="row">
+                            <?php foreach ($services as $index => $service): ?>
+                                <div class="col-md-6 col-lg-4">
+                                    <article class="service-box<?= $index >= 3 ? ' no-margin' : ''; ?><?= $index === array_key_last($services) ? ' last' : ''; ?>">
+                                        <h3><?= esc($service['title']); ?></h3>
+                                        <p><?= esc($service['summary']); ?></p>
+                                    </article>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section resume animated-row" data-section="resume" id="resume">
+            <div class="fixed-layout-content mobile-none">
+                <div class="center">
+                    <div class="animate" data-animate="fadeInUp">
+                        <div class="text-right">
+                            <?= renderSocialIcons($socialLinks); ?>
+                        </div>
+                    </div>
+                    <div class="slide-button animate" data-animate="fadeInUp" aria-hidden="true">
+                        <div class="next-sec"></div>
+                        <div class="prev-sec"></div>
+                    </div>
+                </div>
+                <div class="logo-and-title animate" data-animate="fadeInDown">
+                    <div class="myimg">
+                        <img src="https://setaei.com/images/khabat.jpg" alt="Portrait of <?= esc($site['name']); ?>" draggable="false" loading="lazy">
+                    </div>
+                    <div class="name-box">
+                        <h3><?= esc($site['name']); ?></h3>
+                        <div class="title-box">
+                            <h5><?= esc($site['tagline']); ?></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="current-section animated fadeInUp" data-animate="fadeInUp">
+                <div class="lg-line"></div>
+                <div class="sm-line"></div>
+                <div class="section-name">Resume</div>
+            </div>
+
+            <div class="section-inner">
+                <div class="line-wrap line-black" aria-hidden="true">
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                </div>
+                <div class="center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-4 edu">
+                                <div class="resume-box-name"><span>Education</span></div>
+                                <?php foreach ($education as $item): ?>
+                                    <article class="resume-box">
+                                        <div class="rbn">
+                                            <span class="rbd"><?= esc($item['year']); ?></span>
+                                            <h4><?= esc($item['title']); ?></h4>
+                                        </div>
+                                        <p class="rbp"><?= esc($item['description']); ?></p>
+                                    </article>
+                                <?php endforeach; ?>
+                            </div>
+                            <div class="col-md-6 col-lg-4 exp">
+                                <div class="resume-box-name"><span>Experience</span></div>
+                                <?php foreach ($experience as $item): ?>
+                                    <article class="resume-box">
+                                        <div class="rbn">
+                                            <span class="rbd"><?= esc($item['year']); ?></span>
+                                            <h4><?= esc($item['title']); ?></h4>
+                                        </div>
+                                        <p class="rbp"><?= esc($item['description']); ?></p>
+                                    </article>
+                                <?php endforeach; ?>
+                            </div>
+                            <div class="col-lg-4 col-md-12 skills">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-12">
+                                        <div class="lws resume-box-name"><span>Design Skills</span></div>
+                                        <?php foreach ($designSkills as $skill): ?>
+                                            <div class="skill-box">
+                                                <h4 class="skill-title"><?= esc($skill['label']); ?></h4>
+                                                <div class="progress-line">
+                                                    <span data-percent="<?= esc((string) $skill['percent']); ?>" style="width: <?= esc((string) $skill['percent']); ?>%;"><span class="percent-tooltip"><?= esc((string) $skill['percent']); ?>%</span></span>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                    <div class="col-md-6 col-lg-12">
+                                        <div class="lsw resume-box-name"><span>Programming Skills</span></div>
+                                        <?php foreach ($programmingSkills as $skill): ?>
+                                            <div class="skill-box">
+                                                <h4 class="skill-title"><?= esc($skill['label']); ?></h4>
+                                                <div class="progress-line">
+                                                    <span data-percent="<?= esc((string) $skill['percent']); ?>" style="width: <?= esc((string) $skill['percent']); ?>%;"><span class="percent-tooltip"><?= esc((string) $skill['percent']); ?>%</span></span>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section testimonials animated-row" data-section="testimonials" id="testimonials">
+            <div class="fixed-layout-content mobile-none">
+                <div class="center">
+                    <div class="animate" data-animate="fadeInUp">
+                        <div class="text-right">
+                            <?= renderSocialIcons($socialLinks); ?>
+                        </div>
+                    </div>
+                    <div class="slide-button animate" data-animate="fadeInUp" aria-hidden="true">
+                        <div class="next-sec"><em class="fa fa-arrow-down" aria-hidden="true"></em></div>
+                        <div class="prev-sec"><em class="fa fa-arrow-up" aria-hidden="true"></em></div>
+                    </div>
+                </div>
+                <div class="logo-and-title animate" data-animate="fadeInDown">
+                    <div class="myimg">
+                        <img src="https://setaei.com/images/khabat.jpg" alt="Portrait of <?= esc($site['name']); ?>" draggable="false" loading="lazy">
+                    </div>
+                    <div class="name-box">
+                        <h3><?= esc($site['name']); ?></h3>
+                        <div class="title-box">
+                            <h5><?= esc($site['tagline']); ?></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="current-section animated fadeInUp" data-animate="fadeInUp">
+                <div class="lg-line"></div>
+                <div class="sm-line"></div>
+                <div class="section-name">Clients</div>
+            </div>
+
+            <div class="section-inner">
+                <div class="line-wrap line-black" aria-hidden="true">
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                </div>
+                <div class="center">
+                    <div class="container">
+                        <div class="row align">
+                            <div class="col-sm-12 col-lg-5 col-md-5">
+                                <div class="section-image">
+                                    <img src="https://setaei.com/images/testimonials-cover.jpg" alt="Client collaboration" loading="lazy">
+                                    <div class="video-play">
+                                        <a href="https://www.youtube.com/watch?v=usO_6-RuCrg" data-lity>
+                                            <em class="pe-7s-play" aria-hidden="true"></em>
+                                            <span class="sr-only">Play intro video</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-1 nb" aria-hidden="true"></div>
+                            <div class="col-sm-12 col-lg-6 col-md-6">
+                                <div class="box-title nmt">What Others Say</div>
+                                <div class="testimonials-slider owl-carousel" aria-live="polite">
+                                    <?php foreach ($testimonials as $testimonial): ?>
+                                        <figure class="testimonial-box">
+                                            <blockquote class="testimonial-paragraph">“<?= esc($testimonial['quote']); ?>”</blockquote>
+                                            <figcaption class="testimonial-img-name">
+                                                <img src="https://setaei.com/images/testimonial-placeholder.jpg" alt="<?= esc($testimonial['name']); ?>" loading="lazy">
+                                                <div class="client-info">
+                                                    <h4 class="testimonial-name"><?= esc($testimonial['name']); ?></h4>
+                                                    <span class="client-title"><?= esc($testimonial['title']); ?></span>
+                                                </div>
+                                            </figcaption>
+                                        </figure>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section contact animated-row" data-section="contact" id="contact">
+            <div class="fixed-layout-content mobile-none">
+                <div class="center">
+                    <div class="animate" data-animate="fadeInUp">
+                        <div class="text-right">
+                            <?= renderSocialIcons($socialLinks); ?>
+                        </div>
+                    </div>
+                    <div class="slide-button animate" data-animate="fadeInUp" aria-hidden="true">
+                        <div class="next-sec"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
+                        <div class="prev-sec"><i class="fa fa-arrow-up" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+                <div class="logo-and-title animate" data-animate="fadeInDown">
+                    <div class="myimg">
+                        <img src="https://setaei.com/images/khabat.jpg" alt="Portrait of <?= esc($site['name']); ?>" draggable="false" loading="lazy">
+                    </div>
+                    <div class="name-box">
+                        <h3><?= esc($site['name']); ?></h3>
+                        <div class="title-box">
+                            <h5><?= esc($site['location']); ?></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="current-section animated fadeInUp" data-animate="fadeInUp">
+                <div class="lg-line"></div>
+                <div class="sm-line"></div>
+                <div class="section-name">Contact Me</div>
+            </div>
+
+            <div class="section-inner">
+                <div class="line-wrap line-black" aria-hidden="true">
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                    <div class="line-item"></div>
+                </div>
+                <div class="center">
+                    <div class="container">
+                        <div class="row align">
+                            <div class="col-md-5">
+                                <img src="images/contact-cover.jpg" alt="Remote & travels frequently" style="width:100%;height:auto;border-radius:12px;object-fit:cover;" loading="lazy">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="box-title">Let's Talk.</div>
+                                <form method="post" action="https://formspree.io/f/mwkzkzyb" class="contact-form" autocomplete="on">
+                                    <p>Your information is kept confidential and used only to respond to your inquiry.</p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="sr-only" for="first-name">First Name</label>
+                                            <input type="text" id="first-name" name="first_name" placeholder="First Name" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="sr-only" for="last-name">Last Name</label>
+                                            <input type="text" id="last-name" name="last_name" placeholder="Last Name" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="sr-only" for="email">Your Email Address</label>
+                                            <input type="email" id="email" name="email" placeholder="Your Email Address" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="sr-only" for="location">Where are you from?</label>
+                                            <input type="text" id="location" name="location" placeholder="Where are you from?">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label class="sr-only" for="message">Message</label>
+                                            <textarea id="message" name="message" placeholder="Enter Your Message" rows="4" required></textarea>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6">
+                                            <input type="hidden" name="context" value="<?= esc($site['name']); ?> Portfolio Inquiry">
+                                            <input type="submit" value="Send Message">
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="contact-alt">
+                                    <p><strong>Email:</strong> <a href="mailto:<?= esc($site['email']); ?>"><?= esc($site['email']); ?></a></p>
+                                    <p><strong>Phone:</strong> <a href="tel:<?= esc(str_replace(' ', '', $site['phone'])); ?>"><?= esc($site['phone']); ?></a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container text-center">
+            <p>© <?= esc((string) $year); ?> <?= esc($site['name']); ?> · All rights reserved · <a href="mailto:<?= esc($site['email']); ?>"><?= esc($site['email']); ?></a></p>
         </div>
     </footer>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/fullpage.min.js"></script>
+    <script src="js/scrolloverflow.js"></script>
+    <script src="js/modernizr.min.js"></script>
+    <script src="js/jquery.hoverdir.js"></script>
+    <script src="js/jquery.mixitup.js"></script>
+    <script src="js/lity.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.inview.min.js"></script>
+    <script src="js/form.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhrdEzlfpnsnfq4MgU1e1CCsrvVx2d59s" defer></script>
+    <script src="js/gmaps.js" defer></script>
+    <script src="js/menu-effect.js"></script>
+    <script src="js/custom.js"></script>
 </body>
 </html>
