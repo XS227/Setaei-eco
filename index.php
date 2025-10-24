@@ -13,6 +13,9 @@ function esc(string $value): string
     return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
+$site = [
+    'name' => 'Khabat Setaei',
+    'title' => 'Hybrid Intelligence Strategist',
 /**
  * Render a list of social icons.
  *
@@ -47,6 +50,9 @@ $site = [
     'phone' => '+47 4122 7175',
     'location' => 'Remote · Travels frequently',
     'website' => 'https://setaei.com/',
+    'meta_description' => 'Khabat Setaei is an AI and blockchain engineer crafting hybrid intelligence products, growth systems, and narrative-driven ventures.',
+    'hero_subtitle' => 'Hybrid Intelligence · Blockchain · Product Systems',
+    'hero_cta' => 'https://cal.com/khabat-setaei/intro',
     'hero_subtitle' => 'AI & Blockchain • IT Marketing • Jewelry • Crypto',
     'hero_cta' => 'https://cal.com/khabat-setaei/intro',
     'meta_description' => 'Portfolio of Khabat Setaei – AI & Blockchain engineer focused on hybrid intelligence, tokenized products, and growth strategy.',
@@ -57,6 +63,16 @@ $navigation = [
     ['anchor' => 'home', 'label' => 'Home'],
     ['anchor' => 'about', 'label' => 'About'],
     ['anchor' => 'services', 'label' => 'Services'],
+    ['anchor' => 'projects', 'label' => 'Projects'],
+    ['anchor' => 'books', 'label' => 'Books'],
+    ['anchor' => 'references', 'label' => 'References'],
+    ['anchor' => 'contact', 'label' => 'Contact'],
+];
+
+$socialLinks = [
+    ['label' => 'X', 'url' => 'https://x.com/TheXebat'],
+    ['label' => 'LinkedIn', 'url' => 'https://linkedin.com/in/khabat-setaei'],
+    ['label' => 'GitHub', 'url' => 'https://github.com/khabat'],
     ['anchor' => 'resume', 'label' => 'Resume'],
     ['anchor' => 'testimonials', 'label' => 'Testimonials'],
     ['anchor' => 'contact', 'label' => 'Contact Me'],
@@ -70,6 +86,101 @@ $socialLinks = [
 ];
 
 $services = [
+    ['title' => 'AI & Blockchain Consulting', 'summary' => 'Token economics, smart contract reviews, and hybrid AI roadmaps.'],
+    ['title' => 'Product & Growth Strategy', 'summary' => 'Market positioning, revenue experiments, and analytics for scaling teams.'],
+    ['title' => 'Venture Architecture', 'summary' => 'From discovery to launch for web platforms, APIs, and crypto-enabled ventures.'],
+    ['title' => 'Design Systems & Identity', 'summary' => 'Minimal visual languages, investor decks, and cohesive brand toolkits.'],
+];
+
+$projects = [
+    [
+        'name' => 'Real Shahnameh',
+        'url' => 'https://realshahnameh.setaei.com/',
+        'summary' => 'Epic storytelling franchise with blockchain provenance and community tokenomics.',
+    ],
+    [
+        'name' => 'Sisu',
+        'url' => 'https://sisu.setaei.com/',
+        'summary' => 'Multilingual job and tourism portal connecting Nordic resilience with global talent.',
+    ],
+    [
+        'name' => 'Numerologist',
+        'url' => 'https://numerologist.setaei.com/',
+        'summary' => 'Data-informed numerology research that guides venture naming and energy mapping.',
+    ],
+    [
+        'name' => 'LiveMesh',
+        'url' => 'https://livemesh.setaei.com/',
+        'summary' => 'Real-time mesh intelligence lab exploring AI observability and network effects.',
+    ],
+];
+
+$books = [
+    [
+        'title' => 'Blockchain Intelligence: Leveraging Cryptocurrency Transactions',
+        'summary' => 'Published monograph detailing investigative techniques, compliance tooling, and intelligence models across cryptocurrency railroads.',
+        'url' => 'https://www.amazon.de/Blockchain-Intelligence-Leveraging-Cryptocurrency-Transactions/dp/6200696519',
+    ],
+    [
+        'title' => 'Hybrid Intelligence for Collective Foresight',
+        'summary' => 'Peer-reviewed study in the Journal of Hybrid Intelligence examining how symbolic and machine learning systems co-create decision support.',
+        'url' => 'https://journalhi.com/index.php/com/article/view/247?articlesBySameAuthorPage=2',
+    ],
+    [
+        'title' => 'Real Shahnameh: Mythic Intelligence (Collector’s Edition)',
+        'summary' => 'Blockchain-authenticated storytelling series preserving Persian epics through cryptographic provenance and community activation.',
+        'url' => 'https://realshahnameh.setaei.com/',
+    ],
+];
+
+$references = [
+    [
+        'quote' => '“Khabat has been easy to collaborate with and has consistently shown creativity and dedication beyond expectations. He inspires others to explore new opportunities and brings a unique perspective on inclusion for the Church of Norway.”',
+        'name' => 'Elisabeth Kristiansen',
+        'link' => 'https://kirken.no/',
+        'link_label' => 'kirken.no',
+    ],
+    [
+        'quote' => '“I have collaborated with Khabat Setaei on multiple projects ranging from design, branding, and marketing to web development. One of our most successful joint projects was Dreamwork.no, where he played a key role in both the technology build and marketing strategy. He always delivers high-quality work, listens carefully to customer needs, and always goes the extra mile. I highly recommend Khabat.”',
+        'name' => 'Soheil Seyedi',
+        'link' => 'https://dreamwork.no/',
+        'link_label' => 'dreamwork.no',
+    ],
+    [
+        'quote' => '“We worked with Khabat Setaei on the Megacandy.no project, where he became responsible not only for SEO but also contributed to design, branding, development, and marketing strategy. He is reliable, knowledgeable, and focused on delivering good work and measurable improvements across web authority. Khabat’s ability to combine technical skills with creative marketing insights made a big difference in our success. Customer service and communication were excellent. I can strongly recommend Khabat and his team.”',
+        'name' => 'Alexander Boccio',
+        'link' => 'https://megacandy.no/',
+        'link_label' => 'megacandy.no',
+    ],
+    [
+        'quote' => '“Khabat Setaei provides creative, forward-thinking, and well-crafted solutions with a consistently high level of service, responsiveness, and on-time delivery. For Naturalforce.no, he was responsible for logo design, book design, website development, and social media presence. The results were professional, engaging, and perfectly aligned with our brand identity. Working with Khabat has been a smooth and inspiring experience.”',
+        'name' => 'Anne-Mette Røsting',
+        'link' => 'https://naturalforce.no/',
+        'link_label' => 'naturalforce.no',
+    ],
+    [
+        'quote' => '“We have had the pleasure of working with Khabat on multiple projects under several Scale Group / Viral Media brands, including website and mobile app development, Facebook application work, and digital marketing support. He brings deep technical knowledge with sharp insight and hands-on capability, whether it’s UI/UX design, technology enablement, or marketing. He is reliable and efficient, delivering high-quality results within ambitious timeframes. It is rare to find a partner you can hand a project to, knowing it will be executed with excellence, but for the investment ventures in my network, Khabat has been exactly that partner. I highly recommend him to anyone building within AI, blockchain, or product design and development.”',
+        'name' => 'Tor Martin Olsen',
+        'link' => 'https://scale-group.no/',
+        'link_label' => 'scale-group.no',
+    ],
+    [
+        'quote' => '“I worked together with Khabat Setaei on developing the full brand identity of Pearl Beauty. He created a professional and elegant visual identity, designed our brochures, website, and app, and implemented a modern visual communication design system that immediately elevated our presence. Working with Khabat was genuinely inspiring. We set out with Khabat’s strong commitment and ability to understand our vision, and he translated it into visuals with a consistent, modern aesthetic aligned with our brand values and narrative. His ability to understand Pearl Beauty’s values, translate them into design, and deliver on time was impressive. I can highly recommend him for any business needing brand and digital professionals.”',
+        'name' => 'Anna Fors',
+        'link' => 'https://pearl-beauty.no/',
+        'link_label' => 'pearl-beauty.no',
+    ],
+    [
+        'quote' => '“Khabat Setaei provides creative, forward-thinking solutions with a consistently high level of service and quality. He is always up-to-date and ahead of the curve, delivering excellent results across design, web development, and social media presence. His results were professional, engaging, and perfectly aligned with our brand identity. Working with Khabat has been a smooth and inspiring experience.”',
+        'name' => 'Stein Alvern',
+        'link' => 'https://anwarmedia.com/',
+        'link_label' => 'anwarmedia.com',
+    ],
+    [
+        'quote' => '“I have known Khabat Setaei since 2007 and had the pleasure of working with him for more than a decade. During this time, he has assisted me with hosting, design, and marketing, always delivering reliable and creative solutions that helped grow my business. Khabat was also the one who developed the world’s first numerology calculator for my platform, which has become an essential part of our services and strategy for Numerologens Verden. His technical expertise, combined with his innovative thinking, has been invaluable to me. He is trustworthy, professional, and consistently delivers high-quality results. I can warmly recommend him.”',
+        'name' => 'Åse Steinsland',
+        'link' => 'https://numerologensverden.no/',
+        'link_label' => 'numerologensverden.no',
     ['title' => 'AI & Blockchain Consulting', 'summary' => 'Architecture, tokenomics, audits, smart-contract strategy.'],
     ['title' => 'Product & Growth (IT Marketing)', 'summary' => 'Positioning, funnels, analytics, SEO.'],
     ['title' => 'Web Apps & Integrations', 'summary' => 'Django/Next.js, payments, APIs (Rasmio, etc.).'],
